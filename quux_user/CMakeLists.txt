@@ -30,10 +30,12 @@ add_executable(quux_user-exec
   src/main.cpp
   )
 
-target_link_libraries(quux_user-exec ${roscpp_serialization_LIBRARIES})
+message(STATUS ${roscpp_serialization_LIBRARIES})
 
-add_executable(quux_srv-exec
-  src/srv_test.cpp
-  )
+target_link_libraries(quux_user-exec ${roscpp_serialization_LIBRARIES} ${rostime_LIBRARIES})
 
-target_link_libraries(quux_srv-exec ${roscpp_serialization_LIBRARIES})
+#add_executable(quux_srv-exec
+#  src/srv_test.cpp
+#  )
+
+#target_link_libraries(quux_srv-exec ${roscpp_serialization_LIBRARIES})
