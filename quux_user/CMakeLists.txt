@@ -22,8 +22,6 @@ find_package(sensor_msgs)
 include_directories(${sensor_msgs_INCLUDE_DIRS})
 
 
-
-# todo: will be set by find_package
 include_directories(${std_msgs_INCLUDE_DIRS} ${quux_msgs_INCLUDE_DIRS})
 
 add_executable(quux_user-exec
@@ -34,8 +32,8 @@ message(STATUS ${roscpp_serialization_LIBRARIES})
 
 target_link_libraries(quux_user-exec ${roscpp_serialization_LIBRARIES} ${rostime_LIBRARIES})
 
-#add_executable(quux_srv-exec
-#  src/srv_test.cpp
-#  )
+add_executable(quux_srv-exec
+  src/srv_test.cpp
+  )
 
-#target_link_libraries(quux_srv-exec ${roscpp_serialization_LIBRARIES})
+target_link_libraries(quux_srv-exec ${roscpp_serialization_LIBRARIES})
