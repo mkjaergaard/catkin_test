@@ -7,6 +7,6 @@ def succeed(cmd, **kwargs):
     print ">>>", cmd, kwargs
     (out, r) = run(cmd, withexitstatus=True, **kwargs)
     if r != 0:
-        print "cmd failed: %s\n  result=%u\n  xoutput=%s" % (cmd, r, out)
+        print "cmd failed: %s\n  result=%u\n  output=\n%s" % (cmd, r, out)
     return out
 

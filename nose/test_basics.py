@@ -25,7 +25,9 @@ def teardown():
     
 @with_setup(startbuild, endbuild)
 def test_00():
-    out = succeed("cmake %s '-DCATKIN_BUILD_PROJECTS=catkin_test_nolangs -DCATKIN_LOG=9" % srcdir, cwd=builddir)
-    pass
+    out = succeed("cmake %s '-DCATKIN_BUILD_PROJECTS=catkin_test_nolangs' -DCATKIN_LOG=9" % srcdir, cwd=builddir)
+    out = succeed("make", cwd=builddir)
+    assert exists(builddir + "/catkin_test_nolangs/catkin_test_nolangs_exec")
+
     
     
