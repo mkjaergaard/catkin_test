@@ -25,7 +25,6 @@ bt = with_setup(startbuild, endbuild)
 
 
 @bt
-@attr('this')
 def test_00():
     out = cmake(CMAKE_INSTALL_PREFIX='/tmp')
     assert exists(builddir + "/catkin_test_nolangs")
