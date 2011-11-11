@@ -1,22 +1,23 @@
-#include<quux_msgs/QuuxString.h>
+#include<sensor_msgs/PointCloud2.h>
 
 int main()
 {
-  quux_msgs::QuuxString msg1;
-  msg1.string1.data = std::string("Some Text");
-  msg1.string2.data = std::string("Some Other Text");
+  sensor_msgs::PointCloud2 pc_1;
+  pc_1.width = 10;
+  pc_1.height = 20;
+  // todo set other stuff
 
-  std::cout << "Im a message: " << std::endl << msg1 << std::endl;
+  std::cout << "PointCloud2 message: " << std::endl << pc_1 << std::endl;
 
   uint8_t buf[1024];
   ros::serialization::OStream out(buf, sizeof(buf) );
-  ros::serialization::serialize(out, msg1);
+  ros::serialization::serialize(out, pc_1);
 
-  std::cout << "Im Serialized" << std::endl;
+  std::cout << "Message Was Serialized" << std::endl;
 
-  quux_msgs::QuuxString msg2;
+  sensor_msgs::PointCloud2 pc_2;
   ros::serialization::IStream in(buf, sizeof(buf) );
-  ros::serialization::deserialize(in, msg2);
+  ros::serialization::deserialize(in, pc_2);
 
-  std::cout << "Im a message again: " << std::endl << msg2 << std::endl;
+  std::cout << "Its a message again: " << std::endl << pc_2 << std::endl;
 }

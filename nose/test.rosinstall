@@ -22,7 +22,7 @@
     uri: 'git://github.com/straszheim/roscpp_core.git'
     local-name: roscpp_core
     version: master
-    
+
 - svn:
     uri: 'https://code.ros.org/svn/ros/stacks/ros_comm/trunk/'
     local-name: ros_comm
@@ -36,15 +36,14 @@
     local-name: common_msgs
 
 - git:
-    uri: 'git://github.com/mkjaergaard/catkin_test.git'
+    uri: 'git://github.com/straszheim/catkin_test.git'
     local-name: catkin_test
     version: master
 
-- git: 
+- git:
     uri: 'git://github.com/straszheim/catkin_test_nolangs.git'
     local-name: catkin_test_nolangs
     version: master
 
 
 
-  
