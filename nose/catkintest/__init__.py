@@ -1,5 +1,6 @@
 from pexpect import *
 from nose.tools import *
+from nose.plugins.attrib import attr
 from os.path import *
 import os
 
@@ -28,4 +29,10 @@ def cmake(**kwargs):
     assert isfile(builddir + "/CMakeCache.txt")
     assert isfile(builddir + "/Makefile")
     return o
+
+def assert_exists(prefix, *args):
+    for arg in args:
+        p = os.path.join(prefix, arg)
+        print "Checking for", p
+        assert exists(p)
 
