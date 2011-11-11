@@ -28,4 +28,4 @@ def cmake(**kwargs):
     assert isfile(builddir + "/CMakeCache.txt")
     assert isfile(builddir + "/Makefile")
     return o
-    
+
