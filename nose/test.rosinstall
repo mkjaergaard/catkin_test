@@ -4,6 +4,11 @@
     version: master
 
 - git:
+    uri: 'git://github.com/straszheim/genpy.git'
+    local-name: genpy
+    version: master
+
+- git:
     uri: 'git://github.com/straszheim/genmsg.git'
     local-name: genmsg
     version: master
