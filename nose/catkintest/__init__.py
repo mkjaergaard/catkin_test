@@ -22,12 +22,20 @@ def has_cmakecache():
 
 def cmake(**kwargs):
     args = ''
+    this_builddir = builddir
+    this_srcdir = builddir
     for k, v in kwargs.items():
-        args += " '-D%s=%s'" % (k,v)
-    cmd = "cmake " + srcdir + " " + args
-    o = succeed(cmd, cwd=builddir)
-    assert isfile(builddir + "/CMakeCache.txt")
-    assert isfile(builddir + "/Makefile")
+        if k == 'cwd':
+            this_builddir = v
+        elif k == 'srcdir':
+            this_srcdir = v
+        else:
+            args += " '-D%s=%s'" % (k,v)
+
+    cmd = "cmake " + this_srcdir + " " + args
+    o = succeed(cmd, cwd=this_builddir)
+    assert isfile(this_builddir + "/CMakeCache.txt")
+    assert isfile(this_builddir + "/Makefile")
     return o
 
 def assert_exists(prefix, *args):

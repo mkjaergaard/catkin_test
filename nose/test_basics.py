@@ -58,6 +58,18 @@ def test_01():
     assert exists(prefix + "share/cmake/catkin_test_nolangs/catkin_test_nolangs-config.cmake")
 
 
+#
+# This one needs love:  catkin looks in wrong directory for buildable projects
+#
+#@attr('this')
+#def test_as_subdirectory():
+#    succeed("rosinstall -n subdir_src/src test.rosinstall")
+#    succeed("rm -rf subdir_build")
+#    succeed("mkdir subdir_build")
+#    cmake(this_srcdir="subdir_src", cwd="subdir_build")
+
+
+
 
 
 # @with_setup(startbuild, endbuild)
