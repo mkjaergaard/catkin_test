@@ -7,6 +7,9 @@ import os
 pwd = os.getcwd()
 srcdir = os.path.join(pwd, 'src')
 builddir = os.path.join(pwd, 'build')
+destdir='DESTDIR'
+cmake_install_prefix='/CMAKE_INSTALL_PREFIX'
+diskprefix="%s/%s/%s" % (builddir, destdir, cmake_install_prefix)
 
 def succeed(cmd, **kwargs):
     print ">>>", cmd, kwargs
@@ -23,8 +26,10 @@ def has_cmakecache():
 def cmake(**kwargs):
     args = ''
     this_builddir = builddir
-    this_srcdir = builddir
+    this_srcdir = srcdir
+    print "v~_", this_builddir, this_srcdir
     for k, v in kwargs.items():
+        print "~v^v~", k, v
         if k == 'cwd':
             this_builddir = v
         elif k == 'srcdir':
