@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-# project(a)
+project(a)
 find_package(catkin)
 
 add_library(a SHARED lib.cpp)
