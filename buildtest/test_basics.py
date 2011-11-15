@@ -11,7 +11,8 @@ def setup():
     succeed("ln -s catkin/toplevel.cmake CMakeLists.txt", cwd=srcdir)
 
 def startbuild():
-    succeed("rm -rf %s" % builddir)
+    if isdir(builddir):
+        shutil.rmtree(builddir)
     succeed("mkdir %s" % builddir)
 
 def endbuild():
@@ -23,9 +24,7 @@ def teardown():
 
 bt = with_setup(startbuild, endbuild)
 
-
 @bt
-# @attr('this')
 def test_00():
     out = cmake(CMAKE_INSTALL_PREFIX=cmake_install_prefix)
     assert exists(builddir + "/catkin_test_nolangs")
@@ -62,7 +61,27 @@ def test_01():
                   "bin/catkin_test_nolangs_exec",
                   "share/cmake/catkin_test_nolangs/catkin_test_nolangs-config.cmake")
 
+@bt
+@attr('this')
+def test_noproject():
+    mybuild = pwd + '/build/ck'
+    if isdir(mybuild):
+        shutil.rmtree(mybuild)
+    os.makedirs(mybuild)
+    INST = pwd + "/build/INST"
+    out = cmake(CATKIN_BUILD_PROJECTS='catkin',
+                CMAKE_INSTALL_PREFIX=INST,
+                cwd=mybuild)
+    out = succeed("make install", cwd=mybuild)
+    shutil.rmtree(mybuild)
+    os.makedirs(mybuild)
 
+    out = cmake(srcdir=pwd+'/src/noproject',
+                cwd=mybuild,
+                CMAKE_PREFIX_PATH=INST,
+                expect=fail)
+    print "failed as expected, out=", out
+    assert 'does not match package name argument' in out
 #
 # This one needs love:  catkin looks in wrong directory for buildable projects
 #
