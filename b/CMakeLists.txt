@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
-# project(b)
+project(b)
+
 find_package(catkin)
 find_package(a)
 include_directories(${a_INCLUDE_DIRS})
