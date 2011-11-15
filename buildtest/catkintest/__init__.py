@@ -5,8 +5,8 @@ from os.path import *
 import os
 
 pwd = os.getcwd()
-srcdir = os.path.join(pwd, 'src')
-builddir = os.path.join(pwd, 'build')
+srcdir = os.path.join(pwd, 'src/test.rosinstall')
+builddir = os.path.join(pwd, 'build/test.rosinstall')
 destdir='DESTDIR'
 cmake_install_prefix='/CMAKE_INSTALL_PREFIX'
 diskprefix="%s/%s/%s" % (builddir, destdir, cmake_install_prefix)
@@ -47,5 +47,5 @@ def assert_exists(prefix, *args):
     for arg in args:
         p = os.path.join(prefix, arg)
         print "Checking for", p
-        assert exists(p)
+        assert exists(p), "%s doesn't exist" % p
 
