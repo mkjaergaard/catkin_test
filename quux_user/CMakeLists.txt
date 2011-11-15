@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
 project(quux_user)
 
-# set(CMAKE_FIND_ROOT_PATH /tmp/sandbox)
-
 find_package(quux_msgs)
+assert_unset(quux_msgs_INCLUDE_DIRS)
+
 include_directories(${quux_msgs_INCLUDE_DIRS})
-assert(quux_msgs_INCLUDE_DIRS)
+
 find_package(rostime)
 include_directories(${rostime_INCLUDE_DIRS})
 assert(rostime_INCLUDE_DIRS)

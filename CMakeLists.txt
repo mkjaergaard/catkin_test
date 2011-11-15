@@ -8,6 +8,8 @@ find_package(sensor_msgs REQUIRED)
 foreach(subdir
     quux_msgs
     quux_user
+    a
+    b
     )
   add_subdirectory(${subdir})
 endforeach()
