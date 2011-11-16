@@ -27,14 +27,20 @@ bt = with_setup(startbuild, endbuild)
 @bt
 def test_00():
     out = cmake(CMAKE_INSTALL_PREFIX=cmake_install_prefix)
-    assert exists(builddir + "/catkin_test_nolangs")
-    assert exists(builddir + "/genmsg")
-    assert exists(builddir + "/common_msgs")
     out = succeed("make", cwd=builddir)
-    assert exists(builddir + "/catkin_test_nolangs/catkin_test_nolangs_exec")
-
     out = succeed("make install DESTDIR=%s" % destdir, cwd=builddir)
     prefix = "%s/%s/%s" % (builddir, destdir, cmake_install_prefix)
+
+    assert_exists(builddir,
+                  "lib/liba.so",
+                  "lib/libb.so",
+                  "lib/libc.so",
+                  "lib/libd.so",
+                  "catkin_test_nolangs",
+                  "bin/catkin_test_nolangs_exec",
+                  "bin/quux_srv-exec",
+                  "genmsg",
+                  "common_msgs")
 
     assert_exists(diskprefix,
                   "bin/catkin_test_nolangs_exec",
@@ -43,8 +49,7 @@ def test_00():
                   "share/msg/std_msgs/String.msg",
                   "share/cmake/std_msgs/std_msgs-config.cmake",
                   "share/cmake/std_msgs/std_msgs-config-version.cmake",
-                  "lib/libcpp_common.so"
-                  )
+                  "lib/libcpp_common.so")
 
 @bt
 def test_01():
@@ -54,7 +59,8 @@ def test_01():
     assert not exists(builddir + "/std_msgs")
     assert not exists(builddir + "/genmsg")
     out = succeed("make", cwd=builddir)
-    assert exists(builddir + "/catkin_test_nolangs/catkin_test_nolangs_exec")
+    assert exists(builddir + "/bin/catkin_test_nolangs_exec")
+
     out = succeed("make install DESTDIR=%s" % destdir, cwd=builddir)
 
     assert_exists(diskprefix,
